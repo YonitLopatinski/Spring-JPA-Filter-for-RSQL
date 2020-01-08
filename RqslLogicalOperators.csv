@@ -1,6 +1,6 @@
 Logical Operator,Description,Example
-!=,Not Equal To,?filter=name!=Dviry
-==,Equal To,?filter=name==Dviry ?filter=name==*ry ?filter=name==D*
+!=,Not Equal To,?filter=name!=Yonit
+==,Equal To,?filter=name==Yonit ?filter=name==*nit ?filter=name==Y*
 >=  =ge= ,Greater Or Equal To,?filter=size>=50
 >  =gt=,Greater Than,?filter=size>50
 <=  =le=,Less Or Equal To,?filter=size=le=100 ?filter=size<=100
