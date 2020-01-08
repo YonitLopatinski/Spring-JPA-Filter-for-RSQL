@@ -1,12 +1,12 @@
-RSQL Supported Operators:		
-Logical Operator	Description	Example
+RSQL Supported Operators:
+Logical Operator,Description,Example
 !=	Not Equal To	?filter=name!=Dviry
 ==	Equal To	?filter=name==Dviry
 		?filter=name==*ry
 		?filter=name==D*
 =ge=	Greater Or Equal To	?filter=size>=50
 >=		
-=gt= 	Greater Than	?filter=size>50
+=gt=	Greater Than	?filter=size>50
 >		
 =in=	In	"?filter=id=in=(""f91619bd-9fae-86bb-6c80-ce88f054f24d"", ""c937e60a-1f6e-631e-1a1a-8779bbdbb98e"")"
 =le=	Less Or Equal To	?filter=size=le=100
