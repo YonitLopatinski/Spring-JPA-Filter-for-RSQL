@@ -1,1 +1,4 @@
 Logical Operator,Description,Example
+!=,Not Equal To,?filter=name!=Dviry
+==,Equal To,?filter=name==Dviry ?filter=name==*ry ?filter=name==D*
+=ge= >=,Greater Or Equal To,?filter=size>=50
