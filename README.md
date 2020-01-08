@@ -16,5 +16,6 @@ RSQL Supported Operators:
 |=out=|Not in|"?filter=id=out=(""f91619bd-9fae-86bb-6c80-ce88f054f24d"")"|
 
 |Composite Operator|Description|Example|
+| :----- | :- | :- |
 |" , "|Logical OR|"?filter=name==Dviry,name==Yonit"|
 |;|Logical AND|?filter=size>50;size<100|
