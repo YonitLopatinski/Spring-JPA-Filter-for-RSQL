@@ -4,7 +4,8 @@ Spring JPA Filter for RSQL
 
 RSQL Supported Operators:
 
-|Logical Operator|Description|Example|
+| Logical Operator | Description | Example |
+| :----- | :- | :- |
 |!=|Not Equal To|?filter=name!=Yonit|
 |==|Equal To|?filter=name==Yonit ?filter=name==*nit ?filter=name==Y*|
 |>=  =ge= |Greater Or Equal To|?filter=size>=50|
@@ -15,5 +16,6 @@ RSQL Supported Operators:
 |=out=|Not in|"?filter=id=out=(""f91619bd-9fae-86bb-6c80-ce88f054f24d"")"|
 
 |Composite Operator|Description|Example|
+| :----- | :- | :- |
 |" , "|Logical OR|"?filter=name==Dviry,name==Yonit"|
 |;|Logical AND|?filter=size>50;size<100|
