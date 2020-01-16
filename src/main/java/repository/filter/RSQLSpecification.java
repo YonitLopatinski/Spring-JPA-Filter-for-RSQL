@@ -1,7 +1,6 @@
 package repository.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import cz.jirutka.rsql.parser.ast.ComparisonOperator;
 import org.hibernate.query.criteria.internal.path.RootImpl;

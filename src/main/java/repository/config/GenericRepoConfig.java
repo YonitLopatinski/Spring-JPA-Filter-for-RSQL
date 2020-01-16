@@ -6,7 +6,7 @@ import repository.GenericRepositoryImpl;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "repository",
-        includeFilters = {@ComponentScan.Filter(type = FilterType.REGEX, pattern = "*.repository.*")},
+        includeFilters = {@ComponentScan.Filter(type = FilterType.REGEX, pattern = "repository.*")},
         repositoryBaseClass = GenericRepositoryImpl.class)
 public class GenericRepoConfig {
 }

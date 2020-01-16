@@ -4,7 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import repository.model.Field;
 
-import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
