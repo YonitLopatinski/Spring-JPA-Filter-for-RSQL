@@ -1,6 +1,7 @@
 package repository.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import cz.jirutka.rsql.parser.ast.ComparisonOperator;
 import org.hibernate.query.criteria.internal.path.RootImpl;
@@ -59,6 +60,7 @@ public class RSQLSpecification<T> implements Specification<T> {
         //This module is used for Instant objects serialization
         JavaTimeModule module = new JavaTimeModule();
         objectMapper.registerModule(module);
+        objectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_INDEX);
         return objectMapper;
     }
 }

@@ -22,8 +22,7 @@ import java.util.stream.Collectors;
 public class GenericRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements GenericRepository<T, ID> {
 
     private EntityManager entityManager;
-
-    private RSQLParser parser = new RSQLParser();
+    private RSQLParser parser;
     private CustomRSQLVisitor<T> visitor;
 
     public GenericRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {

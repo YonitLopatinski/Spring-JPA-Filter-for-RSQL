@@ -17,5 +17,5 @@ RSQL Supported Operators:
 
 |Composite Operator|Description|Example|
 | :----- | :- | :- |
-|" , "|Logical OR|"?filter=name==Dviry,name==Yonit"|
+|,|Logical OR|"?filter=name==Dviry,name==Yonit"|
 |;|Logical AND|?filter=size>50;size<100|
