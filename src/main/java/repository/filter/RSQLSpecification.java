@@ -8,6 +8,8 @@ import org.hibernate.query.criteria.internal.path.RootImpl;
 import org.springframework.data.jpa.domain.Specification;
 import repository.filter.builders.PredicateBuilder;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.criteria.*;
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -42,9 +44,14 @@ public class RSQLSpecification<T> implements Specification<T> {
             if (exclude) {
                 throw new UnsupportedOperationException("Filtering is not supported for excluded field: " + property);
             }
+
             final List<Object> args = arguments.stream().map(arg -> {
                 if (arg.equals("null")) {
                     return null;
+                }
+                if (declaredField.getType().isEnum() && getEnumType(declaredField) == EnumType.ORDINAL) {
+                    throw new UnsupportedOperationException("Filtering is not supported for ORDINAL EnumType, field: " + property
+                            + " Should be defined as @Enumerated(EnumType.STRING)");
                 }
                 return objectMapper.convertValue(arg, declaredField.getType());
             }).collect(Collectors.toList());
@@ -55,12 +62,19 @@ public class RSQLSpecification<T> implements Specification<T> {
         }
     }
 
+    private EnumType getEnumType(Field declaredField) {
+        final boolean hasEnumeratedAnnotation = declaredField.isAnnotationPresent(Enumerated.class);
+        if (hasEnumeratedAnnotation) {
+            return declaredField.getAnnotation(Enumerated.class).value();
+        }
+        return EnumType.ORDINAL;
+    }
+
     private ObjectMapper getObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         //This module is used for Instant objects serialization
         JavaTimeModule module = new JavaTimeModule();
         objectMapper.registerModule(module);
-        objectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_INDEX);
         return objectMapper;
     }
 }

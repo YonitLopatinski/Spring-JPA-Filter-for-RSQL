@@ -67,18 +67,6 @@ public class GenericRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
 
     @Override
     @Transactional
-    public int update(List<Field> entry, Predicate predicate) {
-        Class<T> clazz = getDomainClass();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaUpdate criteriaUpdate = criteriaBuilder.createCriteriaUpdate(clazz);
-        Root root = criteriaUpdate.from(clazz);
-        root.alias(clazz.getSimpleName());
-        entry.stream().forEach(field -> criteriaUpdate.set(field.getName(), field.getValue()));
-        return entityManager.createQuery(criteriaUpdate.where(predicate)).executeUpdate();
-    }
-
-    @Override
-    @Transactional
     public int update(List<Field> entry, String filter) {
         Class<T> clazz = getDomainClass();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -95,29 +83,6 @@ public class GenericRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
     }
 
     @Override
-    public <T> List<T> find(Predicate predicate) {
-        Class clazz = getDomainClass();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(clazz);
-        Root<T> root = criteriaQuery.from(clazz);
-        root.alias(clazz.getSimpleName());
-        return entityManager.createQuery(criteriaQuery.select(root)
-                .where(predicate)).getResultList();
-    }
-
-    @Override
-    @Transactional
-    public int delete(Predicate predicate) {
-        Class<T> clazz = getDomainClass();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaDelete criteriaDelete = criteriaBuilder.createCriteriaDelete(clazz);
-        Root root = criteriaDelete.from(clazz);
-        root.alias(clazz.getSimpleName());
-
-        return entityManager.createQuery(criteriaDelete.where(predicate)).executeUpdate();
-    }
-
-    @Override
     @Transactional
     public int delete(String filter) {
         Class<T> clazz = getDomainClass();
@@ -131,23 +96,6 @@ public class GenericRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
         final Predicate predicate = specification.toPredicate(root, criteriaBuilder.createQuery(), criteriaBuilder);
 
         return entityManager.createQuery(criteriaDelete.where(predicate)).executeUpdate();
-    }
-
-    @Override
-    public long count(Predicate predicate) {
-        Class clazz = getDomainClass();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-        Root<T> root = criteriaQuery.from(clazz);
-        root.alias(clazz.getSimpleName());
-        criteriaQuery.where(predicate);
-        if (criteriaQuery.isDistinct()) {
-            criteriaQuery.select(criteriaBuilder.countDistinct(root));
-        } else {
-            criteriaQuery.select(criteriaBuilder.count(root));
-        }
-        List<Long> results = entityManager.createQuery(criteriaQuery).getResultList();
-        return results.stream().mapToLong(result -> result == null ? 0 : result).sum();
     }
 
     @Override
@@ -170,18 +118,5 @@ public class GenericRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
         }
         List<Long> results = entityManager.createQuery(criteriaQuery).getResultList();
         return results.stream().mapToLong(result -> result == null ? 0 : result).sum();
-    }
-
-    @Override
-    public CriteriaBuilder getCriteriaBuilder() {
-        return entityManager.getCriteriaBuilder();
-    }
-
-    @Override
-    public Path getPath(String fieldName) {
-        Class<T> clazz = getDomainClass();
-        Root root = entityManager.getCriteriaBuilder().createQuery().from(clazz);
-        root.alias(clazz.getSimpleName());
-        return root.get(fieldName);
     }
 }
