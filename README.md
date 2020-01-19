@@ -1,6 +1,8 @@
 # Spring-JPA-Filter-for-RSQL
 Spring JPA Filter for RSQL 
 
+This library translate RSQL into Spring Data JPA Specification
+
 
 RSQL Supported Operators:
 
